@@ -4,6 +4,11 @@ const Users = require('../data/helpers/userDb.js');
 
 const router = express.Router();
 
+function capitalizeName(req, res, next) {
+	req.body.name = req.body.name.toUpperCase();
+	next();
+}
+
 router.get('/', async (req, res) => {
 	try {
 		const users = await Users.get();
@@ -29,7 +34,7 @@ router.get('/:id', async (req, res) => {
 	}
 });
 
-router.post('/', async (req, res) => {
+router.post('/', capitalizeName, async (req, res) => {
 	if (!req.body.name) {
 		res.status(406).json({ message: 'Please enter a name' });
 		return;
