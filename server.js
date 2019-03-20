@@ -5,7 +5,7 @@ const server = express();
 
 server.use(express.json());
 
-server.use('/user', userRouter);
+server.use('/users', userRouter);
 
 server.get('/', (req, res, next) => {
 	res.send(`
